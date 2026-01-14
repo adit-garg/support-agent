@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_ollama import OllamaEmbeddings
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
@@ -159,10 +159,7 @@ def load_vector_store():
             return None, "Vector store not found. Please run generate_embeddings.py first."
         
         # Create embeddings object (same model used to generate)
-        embeddings = OllamaEmbeddings(
-            model="nomic-embed-text",
-            base_url="http://localhost:11434"
-        )
+        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
         
         # Load the pre-generated vector store
         vector_store = FAISS.load_local(
