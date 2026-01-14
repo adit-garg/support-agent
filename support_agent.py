@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_huggingface.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
@@ -159,7 +159,9 @@ def load_vector_store():
             return None, "Vector store not found. Please run generate_embeddings.py first."
         
         # Create embeddings object (same model used to generate)
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+        embeddings = SentenceTransformerEmbeddings(
+            model_name="all-mpnet-base-v2"
+        )
         
         # Load the pre-generated vector store
         vector_store = FAISS.load_local(
