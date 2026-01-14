@@ -17,20 +17,56 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-
+st.markdown("""
+<script>
+    var stAppColorScheme = window.parent.document.querySelector('[data-testid="stAppViewContainer"]');
+    if (stAppColorScheme) {
+        stAppColorScheme.style.colorScheme = 'light';
+    }
+</script>
+""", unsafe_allow_html=True)
 # Professional minimal CSS
 st.markdown("""
 <style>
+    /* Force light mode */
+    [data-testid="stAppViewContainer"] {
+        background-color: #fafaf9 !important;
+    }
+    
+    [data-testid="stHeader"] {
+        background-color: #ffffff !important;
+    }
+    
     /* Main background */
     .main {
         background-color: #fafaf9;
+        color: #1c1917;
     }
     
     /* Hide default Streamlit elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    
+    /* Button text visibility */
+    .stButton button {
+        background-color: #1c1917;
+        color: #ffffff !important;
+        border: none;
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        transition: all 0.2s;
+    }
+
+    .stButton button * {
+        color: #ffffff !important;
+    }
+
+    .stButton button p {
+        color: #ffffff !important;
+        margin: 0;
+    }
     /* Custom header */
     .custom-header {
         background-color: #ffffff;
@@ -42,14 +78,14 @@ st.markdown("""
     .custom-header h1 {
         font-size: 1.5rem;
         font-weight: 600;
-        color: #1c1917;
+        color: #1c1917 !important;
         margin: 0;
         letter-spacing: -0.02em;
     }
     
     .custom-header p {
         font-size: 0.875rem;
-        color: #78716c;
+        color: #78716c !important;
         margin: 0.25rem 0 0 0;
     }
     
@@ -67,6 +103,10 @@ st.markdown("""
         border-color: #d6d3d1;
     }
     
+    .stChatMessage p {
+        color: #1c1917 !important;
+    }
+    
     /* Chat input */
     .stChatInput {
         border-radius: 0.5rem;
@@ -79,17 +119,23 @@ st.markdown("""
     }
     
     .stChatInput input {
-        color: #1c1917;
+        color: #1c1917 !important;
+        background-color: #ffffff !important;
+    }
+    
+    .stChatInput textarea {
+        color: #1c1917 !important;
+        background-color: #ffffff !important;
     }
     
     .stChatInput input::placeholder {
-        color: #a8a29e;
+        color: #a8a29e !important;
     }
     
     /* Buttons */
     .stButton button {
         background-color: #1c1917;
-        color: #ffffff;
+        color: #ffffff !important;
         border: none;
         border-radius: 0.375rem;
         padding: 0.5rem 1rem;
@@ -117,7 +163,7 @@ st.markdown("""
         border: 1px solid #bbf7d0;
         border-radius: 9999px;
         font-size: 0.75rem;
-        color: #15803d;
+        color: #15803d !important;
         font-weight: 500;
     }
     
@@ -135,7 +181,26 @@ st.markdown("""
         border-radius: 0.5rem;
         padding: 1rem;
         margin: 1rem 0;
-        color: #991b1b;
+        color: #991b1b !important;
+    }
+    
+    .error-box * {
+        color: #991b1b !important;
+    }
+    
+    /* Streamlit error messages */
+    [data-testid="stException"] {
+        color: #991b1b !important;
+        background-color: #fef2f2 !important;
+    }
+    
+    [data-testid="stException"] * {
+        color: #991b1b !important;
+    }
+    
+    /* All text elements */
+    p, span, div, label {
+        color: #1c1917 !important;
     }
 </style>
 """, unsafe_allow_html=True)
